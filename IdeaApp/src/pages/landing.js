@@ -10,10 +10,20 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Done from '@material-ui/icons/Done';
+
+import {BsCheckBox} from 'react-icons/bs';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
+  },
+  card: {
+    marginBottom: '20px'
   },
   bullet: {
     display: 'inline-block',
@@ -49,6 +59,16 @@ const useStyles = makeStyles((theme) => ({
   pos: {
     marginBottom: 12,
   },
+  options: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  titles: {
+    marginRight: '50%'
+  },
+  optionButtons: {
+    marginTop: '10px',
+  }
 }));
 
 const Landing = () => {
@@ -68,11 +88,7 @@ const Landing = () => {
           alignItems: "center",
         }}
       >
-      <div style={{position: "absolute", top: 15, right: 25}}>
-        <Button variant="contained" color="primary" onClick={logout}>
-          Log Out
-        </Button>
-      </div>
+      
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
@@ -87,11 +103,90 @@ const Landing = () => {
           />
         </div>
       </div>
-    <div style={{marginLeft: '293.2px'}}>
-      <h1>
-        My Projects
-      </h1>
-      <Card className={classes.root}>
+      <div style={{float: 'right', marginRight: '30px', marginBottom: '20px'}}>
+        <Button variant="contained" color="primary" onClick={logout}>
+          Log Out
+        </Button>
+      </div>
+    <div style={{marginLeft: '293.2px', marginRight: '30px', marginTop: '60px'}}>
+      
+      <div className={classes.options}>
+        <h1 className={classes.titles}>
+          My Projects
+        </h1>
+        <BottomNavigation
+          showLabels
+          className={classes.root}
+        >
+          <BottomNavigationAction label="Ongoing" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Favorite" icon={<FavoriteIcon />} />
+          <BottomNavigationAction label="Completed" icon={<Done />} />
+        </BottomNavigation>
+      </div>
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            Word of the Day
+          </Typography>
+          <Typography variant="h5" component="h2">
+            test
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            adjective
+          </Typography>
+          <Typography variant="body2" component="p">
+            well meaning and kindly.
+            <br />
+            {'"a benevolent smile"'}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            Word of the Day
+          </Typography>
+          <Typography variant="h5" component="h2">
+            test
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            adjective
+          </Typography>
+          <Typography variant="body2" component="p">
+            well meaning and kindly.
+            <br />
+            {'"a benevolent smile"'}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            Word of the Day
+          </Typography>
+          <Typography variant="h5" component="h2">
+            test
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            adjective
+          </Typography>
+          <Typography variant="body2" component="p">
+            well meaning and kindly.
+            <br />
+            {'"a benevolent smile"'}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
+      <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             Word of the Day
