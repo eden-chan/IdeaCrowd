@@ -1,9 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Landing from "./landing"
-import { FaPaw } from "react-icons/fa";
-import forest2 from "../assets/fall-forest.jpg"
-import forest4 from "../assets/forest2.png"
 
 
 const Home = () => {
