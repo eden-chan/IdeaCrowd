@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Aside from "./Aside";
-// import "./styles/App.scss";
+import "./styles/App.scss";
 
 function Layout({ setLocale }) {
   const [rtl, setRtl] = useState(false);

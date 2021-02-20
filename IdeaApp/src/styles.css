@@ -16,6 +16,7 @@
     -ms-user-select: none;
     user-select: none;
     overflow: hidden;
+    background-color: #CCD6E8;
   }
   
   #root {
