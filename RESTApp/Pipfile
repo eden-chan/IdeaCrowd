@@ -9,6 +9,8 @@ sqlalchemy = "*"
 sqlalchemy-cockroachdb = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
+flask-migrate = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy.orm
 from cockroachdb.sqlalchemy import run_transaction
@@ -10,22 +11,61 @@ CONFIG_PATH = './rest.cfg'
 app = Flask(__name__)
 app.config.from_pyfile(CONFIG_PATH)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 sessionmaker = sqlalchemy.orm.sessionmaker(db.engine)
 
 ### Database Schemas
+
+# lookup table to help model the many-to-many relationship between Users and Projects
+ownership = db.Table('ownership',
+    db.Column('project_id', db.Integer, db.ForeignKey('projects.id'), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True)
+)
+
 class User(db.Model):
-    pass
+    '''
+    Represents an application user. NOTE again... passwords are
+    stored naked in the database! No hashing or salting is done!
+    A User can own none, one, or many projects
+    '''
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(256), index=True, unique=True)
+    password = db.Column(db.String(256), index=True)
+    projects = db.relationship('Project', secondary=ownership)
+
+    def __repr__(self) -> str:
+        '''
+        Return a string representation of the User object. 
+        Easier debugging.
+        '''
+        return f'<User {self.username}>'
 
 
 class Project(db.Model):
-    pass
+    '''
+    Represents a project that can be created by users.
+    A Project can have one or many owners that are of type User.
+    '''
+    __tablename__ = 'projects'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256), index=True)
+
+    def __repr__(self) -> str:
+        '''
+        Return a string representation of the Project object. 
+        Easier debugging.
+        '''
+        return f'<Project {self.name}>'
 
 
 ### URL Routes
 #   Note that domainname.com in the below comments means the actual domain name
 #   that the live app is run i.e running locally would be localhost and on a vps
 #   would be the url that the vps provides.
-
+"""
 @app.route('/user/<int:user_id>', methods=['GET'])
 def get_user():
     '''
@@ -120,7 +160,7 @@ def update_project():
     contains the data for the new version of the project.
     '''
     pass
-
+"""
 
 if __name__ == '__main__':
     app.run()
