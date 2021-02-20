@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy.orm
+from werkzeug.http import HTTP_STATUS_CODES
 from cockroachdb.sqlalchemy import run_transaction
 
 
@@ -33,7 +34,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(256), index=True, unique=True)
     password = db.Column(db.String(256), index=True)
-    projects = db.relationship('Project', secondary=ownership)
+    projects = db.relationship('Project', secondary=ownership, back_populates='owners')
 
     def __repr__(self) -> str:
         '''
@@ -41,6 +42,17 @@ class User(db.Model):
         Easier debugging.
         '''
         return f'<User {self.username}>'
+
+    def toJSON(self) -> dict:
+        '''
+        Returns a JSON serializable object representation of the User
+        '''
+        toDict = {
+            'id': self.id,
+            'username': self.username,
+            'projects': [p.id for p in self.projects]
+        }
+        return toDict
 
 
 class Project(db.Model):
@@ -52,6 +64,9 @@ class Project(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), index=True)
+    owners = db.relationship('User', secondary=ownership, back_populates='projects')
+    todos = db.relationship('TodoItem', back_populates='project')
+    elements = db.relationship('ProjectElement', back_populates='project')
 
     def __repr__(self) -> str:
         '''
@@ -60,20 +75,118 @@ class Project(db.Model):
         '''
         return f'<Project {self.name}>'
 
+    def toJSON(self) -> dict:
+        '''
+        Returns a JSON serializable object representation of the Project
+        '''
+        toDict = {
+            'id': self.id,
+            'name': self.name,
+            'owners': [u.id for u in self.owners],
+            'todos': [t.toJSON() for t in self.todos],
+            'elements': [e.toJSON() for e in self.elements]
+        }
+        return toDict
+
+
+class TodoItem(db.Model):
+    '''
+    Represents an editable todo elemement in a project.
+    '''
+    __tablename__ = 'todoitems'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(256))
+    description = db.Column(db.String(600))
+    completed = db.Column(db.Boolean)
+    due_date = db.Column(db.DateTime)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
+    project = db.relationship('Project', back_populates='todos')
+
+    def __repr__(self) -> str:
+        '''
+        Return a string representation of the TodoItem object. 
+        Easier debugging.
+        '''
+        return f'<TodoItem {self.description}>'
+
+    def toJSON(self) -> dict:
+        '''
+        Returns a JSON serializable object representation of the TodoItem
+        '''
+        toDict = {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'completed': self.completed,
+            'due_date': self.due_date.isoformat(),
+            'project_id': self.project_id
+        }
+        return toDict
+
+
+class ProjectElement(db.Model):
+    '''
+    Represents an editable element in a project. The data is stored as a string
+    regardless of what the original type it was (text, image, audio etc) as string
+    is the common "intermediate" type between all these formats. This also stores
+    a field that captures the original type thus on retreiving, the string can be
+    decoded to the original type.
+    '''
+    __tablename__ = 'projectelements'
+
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.String())
+    type = db.Column(db.String(256), index=True)
+    position = db.Column(db.Integer)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
+    project = db.relationship('Project', back_populates='elements')
+
+    def __repr__(self) -> str:
+        '''
+        Return a string representation of the ProjectElement object. 
+        Easier debugging.
+        '''
+        return f'<ProjectElement {self.data}>'
+
+    def toJSON(self) -> dict:
+        '''
+        Returns a JSON serializable object representation of the ProjectElement
+        '''
+        toDict = {
+            'id': self.id,
+            'data': self.data,
+            'type': self.type,
+            'position': self.position,
+            'project_id': self.project_id
+        }
+        return toDict
+
+### Error responses
+
+
+def error_response(status_code, message=None):
+    payload = {'error': HTTP_STATUS_CODES.get(status_code, 'Unknown error')}
+    if message:
+        payload['message'] = message
+    response = jsonify(payload)
+    response.status_code = status_code
+    return response
+
 
 ### URL Routes
 #   Note that domainname.com in the below comments means the actual domain name
 #   that the live app is run i.e running locally would be localhost and on a vps
 #   would be the url that the vps provides.
-"""
+
 @app.route('/user/<int:user_id>', methods=['GET'])
-def get_user():
+def get_user(user_id: int):
     '''
     Send GET request to "domainname.com/user/user_id" where user_id is the
     number of the user id to get infomation on.
     '''
-    pass
-
+    user = User.query.filter_by(id = user_id)[0];
+    return jsonify(user.toJSON())
 
 
 @app.route('/signup', methods=['POST'])
@@ -83,9 +196,21 @@ def create_user():
     username and password that would like to be created. Will return bad request
     if username already exists in database.
     '''
-    pass
+    data = request.get_json()
+    user = User.query.filter_by(username=data['username']).first()
+    print(user)
+    if user:
+        return error_response(400, 'bad request')
+    else:
+        def callback(session):
+            data = request.get_json()
+            newUser = User(username=data['username'], password=data['password'])
+            session.add(newUser)
+            return jsonify(newUser.toJSON())
+        return run_transaction(sessionmaker, callback)
+        
 
-
+"""
 @app.route('/login', methods=['POST'])
 def validate_user():
     '''
