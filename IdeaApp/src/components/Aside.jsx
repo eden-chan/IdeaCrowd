@@ -1,10 +1,31 @@
 import React from "react";
-import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from "react-pro-sidebar";
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from "react-icons/fa";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SidebarHeader,
+  SidebarContent,
+} from "react-pro-sidebar";
+import {
+  FaTachometerAlt,
+  FaUserFriends
+} from "react-icons/fa";
+import {
+  FiSettings
+} from "react-icons/fi";
+import {HiViewGrid} from "react-icons/hi";
+import { BsFillChatFill } from "react-icons/bs";
+import "react-pro-sidebar/dist/css/styles.css";
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   return (
-    <ProSidebar rtl={rtl} collapsed={collapsed} toggled={toggled} breakPoint="md" onToggle={handleToggleSidebar}>
+    <ProSidebar
+      rtl={rtl}
+      collapsed={collapsed}
+      toggled={toggled}
+      breakPoint="md"
+      onToggle={handleToggleSidebar}
+    >
       <SidebarHeader>
         <div
           style={{
@@ -18,62 +39,25 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             whiteSpace: "nowrap",
           }}
         >
-          sidebarTitle
+          IdeaCrowd
         </div>
       </SidebarHeader>
 
       <SidebarContent>
         <Menu iconShape="circle">
-          <MenuItem icon={<FaTachometerAlt />} suffix={<span className="badge red">new</span>}>
-            dashboard
+          <MenuItem
+            icon={<FaTachometerAlt />}
+          >
+            New Project
           </MenuItem>
-          <MenuItem icon={<FaGem />}>components</MenuItem>
+          <MenuItem icon={<HiViewGrid />}>Explore</MenuItem>
         </Menu>
         <Menu iconShape="circle">
-          <SubMenu suffix={<span className="badge yellow">3</span>} title="withsuffix" icon={<FaRegLaughWink />}>
-            <MenuItem>submenu 1</MenuItem>
-            <MenuItem>submenu 2</MenuItem>
-            <MenuItem>submenu 3</MenuItem>
-          </SubMenu>
-          <SubMenu prefix={<span className="badge gray">3</span>} title="withprefix" icon={<FaHeart />}>
-            <MenuItem>submenu 1</MenuItem>
-            <MenuItem>submenu 2</MenuItem>
-            <MenuItem>submenu 3</MenuItem>
-          </SubMenu>
-          <SubMenu title="multilevel" icon={<FaList />}>
-            <MenuItem>submenu 1 </MenuItem>
-            <MenuItem>submenu 2 </MenuItem>
-            <SubMenu title={`$submenu 3`}>
-              <MenuItem>submenu 3.1 </MenuItem>
-              <MenuItem>submenu 3.2 </MenuItem>
-              <SubMenu title={`$submenu 3.3`}>
-                <MenuItem>submenu 3.3.1 </MenuItem>
-                <MenuItem>submenu 3.3.2 </MenuItem>
-                <MenuItem>submenu 3.3.3 </MenuItem>
-              </SubMenu>
-            </SubMenu>
-          </SubMenu>
+          <MenuItem icon={<FaUserFriends />}>Friends</MenuItem>
+          <MenuItem icon={<BsFillChatFill />}>Chats</MenuItem>
+          <MenuItem icon={<FiSettings />}>Settings</MenuItem>
         </Menu>
       </SidebarContent>
-
-      <SidebarFooter style={{ textAlign: "center" }}>
-        <div
-          className="sidebar-btn-wrapper"
-          style={{
-            padding: "20px 24px",
-          }}
-        >
-          <a
-            href="https://github.com/azouaoui-med/react-pro-sidebar"
-            target="_blank"
-            className="sidebar-btn"
-            rel="noopener noreferrer"
-          >
-            <FaGithub />
-            <span> view source</span>
-          </a>
-        </div>
-      </SidebarFooter>
     </ProSidebar>
   );
 };

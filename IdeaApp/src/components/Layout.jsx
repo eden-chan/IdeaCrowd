@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Aside from "./Aside";
-// import "./styles/App.scss";
+import "./styles/App.scss";
 
 function Layout({ setLocale }) {
   const [rtl, setRtl] = useState(false);
@@ -25,7 +25,7 @@ function Layout({ setLocale }) {
   };
 
   return (
-    <div className={`app ${rtl ? "rtl" : ""} ${toggled ? "toggled" : ""}`}>
+    <div className={`app ${rtl ? "rtl" : ""} ${toggled ? "toggled" : ""}`} style={{position: 'fixed', height: '100vh'}}>
       <Aside
         image={image}
         collapsed={collapsed}

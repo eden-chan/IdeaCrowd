@@ -69,7 +69,6 @@ class SignIn extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div style={{backgroundImage: `url(${bear})`, height: '500px'}}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <br/>
@@ -126,7 +125,6 @@ class SignIn extends React.Component {
         <Box mt={8}>
         </Box>
       </Container>
-      </div>
     );
   }
 }
