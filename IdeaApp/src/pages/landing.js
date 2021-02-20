@@ -16,7 +16,7 @@ const Landing = () => {
           <Col xs={2} id="sidebar-wrapper">      
             <Layout />
           </Col>
-          <Col  xs={10} id="page-content-wrapper">
+          <Col xs={10} id="page-content-wrapper">
               <div
               style={{
                 display: "flex",
