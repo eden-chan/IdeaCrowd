@@ -15,12 +15,15 @@
     "mobx-devtools-mst": "^0.9.30",
     "mobx-react": "^7.0.5",
     "mobx-state-tree": "^5.0.0",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-color": "^2.19.3",
     "react-component-export-image": "^1.0.5",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.14.1",
-    "react-icons": "^4.1.0",
+    "react-icons": "^4.2.0",
+    "react-intl": "^5.12.3",
+    "react-pro-sidebar": "^0.6.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-spring": "^8.0.27",
@@ -33,7 +36,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -52,5 +57,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.1.18",
+    "@storybook/addon-essentials": "^6.1.18",
+    "@storybook/addon-links": "^6.1.18",
+    "@storybook/node-logger": "^6.1.18",
+    "@storybook/preset-create-react-app": "^3.1.6",
+    "@storybook/react": "^6.1.18"
   }
 }
