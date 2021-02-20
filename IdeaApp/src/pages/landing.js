@@ -15,6 +15,11 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Done from '@material-ui/icons/Done';
+import Forest from '../assets/forest.jpg';
+import Forest1 from '../assets/forest1.jpg';
+import Forest2 from '../assets/forest2.png';
+
+import CustomCard from '../components/CustomCard';
 
 import {BsCheckBox} from 'react-icons/bs';
 
@@ -23,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 275,
   },
   card: {
-    marginBottom: '20px'
+    marginBottom: '20px',
+    backgroundImage: `url(${Forest})`,
+    color: 'white'
   },
   bullet: {
     display: 'inline-block',
@@ -55,9 +62,11 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 14,
+    color: 'white'
   },
   pos: {
     marginBottom: 12,
+    color: 'white'
   },
   options: {
     display: 'flex',
@@ -68,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
   },
   optionButtons: {
     marginTop: '10px',
+  },
+  buttonCard: {
+    color: 'white'
   }
 }));
 
@@ -129,7 +141,7 @@ const Landing = () => {
             Word of the Day
           </Typography>
           <Typography variant="h5" component="h2">
-            test
+            Benevolent
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             adjective
@@ -141,72 +153,11 @@ const Landing = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small" className={classes.buttonCard}>Learn More</Button>
         </CardActions>
       </Card>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
-            test
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
-            test
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
-            test
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
+      <CustomCard title='test' type='test' description='test' background={Forest1} />
+      <CustomCard title='Make a wish' type='Charity' description='Project focusing on bringing wishes of children with physical or mental disabilities come true.' background={Forest2} />
     </div>
     </div>
     );
