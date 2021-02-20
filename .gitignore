@@ -1,2 +1,9 @@
 node_modules
 .vscode
+
+# database tokens
+RESTApp/rest.cfg
+RESTApp/cc-ca.crt
+
+# eslint
+.eslintcache
