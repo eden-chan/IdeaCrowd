@@ -2,7 +2,7 @@ import React from "react";
 import { auth } from "../firebase";
 import Button from "@material-ui/core/Button";
 import Layout from "../components/Layout";
-import "react-pro-sidebar/dist/css/styles.css";
+import {Container, Row, Col, Card, Form } from "react-bootstrap";
 
 const Landing = () => {
   const logout = () => {
@@ -10,22 +10,29 @@ const Landing = () => {
   };
 
   return (
-    <div>
-      <Layout />
-      {/* <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "90vh",
-        }}
-      >
-        <Button variant="contained" color="primary" onClick={logout}>
-          Log Out
-        </Button>
-      </div> */}
-    </div>
-  );
+    <>
+     <Container fluid>
+        <Row>
+          <Col xs={2} id="sidebar-wrapper">      
+            <Layout />
+          </Col>
+          <Col  xs={10} id="page-content-wrapper">
+              <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Button variant="contained" color="primary" onClick={logout}>
+                Log Out
+              </Button>
+            </div>
+          </Col>  
+        </Row>
+      </Container>
+    </>
+    );
 };
 
 export default Landing;

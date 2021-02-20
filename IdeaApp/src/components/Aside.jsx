@@ -1,10 +1,32 @@
 import React from "react";
-import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from "react-pro-sidebar";
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from "react-icons/fa";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarContent,
+} from "react-pro-sidebar";
+import {
+  FaTachometerAlt,
+  FaGem,
+  FaList,
+  FaGithub,
+  FaRegLaughWink,
+  FaHeart,
+} from "react-icons/fa";
+import "react-pro-sidebar/dist/css/styles.css";
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   return (
-    <ProSidebar rtl={rtl} collapsed={collapsed} toggled={toggled} breakPoint="md" onToggle={handleToggleSidebar}>
+    <ProSidebar
+      rtl={rtl}
+      collapsed={collapsed}
+      toggled={toggled}
+      breakPoint="md"
+      onToggle={handleToggleSidebar}
+    >
       <SidebarHeader>
         <div
           style={{
@@ -24,18 +46,29 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
 
       <SidebarContent>
         <Menu iconShape="circle">
-          <MenuItem icon={<FaTachometerAlt />} suffix={<span className="badge red">new</span>}>
+          <MenuItem
+            icon={<FaTachometerAlt />}
+            suffix={<span className="badge red">new</span>}
+          >
             dashboard
           </MenuItem>
           <MenuItem icon={<FaGem />}>components</MenuItem>
         </Menu>
         <Menu iconShape="circle">
-          <SubMenu suffix={<span className="badge yellow">3</span>} title="withsuffix" icon={<FaRegLaughWink />}>
+          <SubMenu
+            suffix={<span className="badge yellow">3</span>}
+            title="withsuffix"
+            icon={<FaRegLaughWink />}
+          >
             <MenuItem>submenu 1</MenuItem>
             <MenuItem>submenu 2</MenuItem>
             <MenuItem>submenu 3</MenuItem>
           </SubMenu>
-          <SubMenu prefix={<span className="badge gray">3</span>} title="withprefix" icon={<FaHeart />}>
+          <SubMenu
+            prefix={<span className="badge gray">3</span>}
+            title="withprefix"
+            icon={<FaHeart />}
+          >
             <MenuItem>submenu 1</MenuItem>
             <MenuItem>submenu 2</MenuItem>
             <MenuItem>submenu 3</MenuItem>

@@ -6,7 +6,6 @@ import Landing from "./landing"
 const Home = () => {
   return (
     <Switch>
-      <Route path='/else' component={Landing} />
       <Route path='/' component={Landing} />
     </Switch>
   );

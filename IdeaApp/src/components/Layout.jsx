@@ -25,7 +25,7 @@ function Layout({ setLocale }) {
   };
 
   return (
-    <div className={`app ${rtl ? "rtl" : ""} ${toggled ? "toggled" : ""}`}>
+    <div className={`app ${rtl ? "rtl" : ""} ${toggled ? "toggled" : ""}`} style={{position: 'fixed', height: '100vh'}}>
       <Aside
         image={image}
         collapsed={collapsed}
