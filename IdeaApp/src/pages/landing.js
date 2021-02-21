@@ -18,6 +18,9 @@ import Forest2 from '../assets/forest2.png';
 import CustomCard from '../components/CustomCard';
 import TemporaryDrawer from '../components/TemporaryDrawer';
 
+import TextField from '@material-ui/core/TextField';
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
@@ -100,14 +103,7 @@ const Landing = () => {
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
+          <TextField style={{width:'30vw'}} id="outlined-search" label="Search field" type="search" variant="outlined" />
         </div>
       </div>
       <div style={{float: 'right', marginRight: '30px', marginBottom: '20px'}}>

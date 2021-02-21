@@ -26,7 +26,7 @@
     "react-intl": "^5.12.3",
     "react-pro-sidebar": "^0.6.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
+    "react-scripts": "^4.0.2",
     "react-spring": "^8.0.27",
     "react-switch-selector": "^1.2.1",
     "react-zdog": "^1.0.11",
