@@ -2,7 +2,7 @@
 
 ### App to bring similar mindeded people together to build amazing projects
 
-
+Check out our Devpost submission for UofTHacks 2021:  https://devpost.com/software/ideacrowd-vdqb9c
 ### Flask REST App Developer Installation
 1. `pip install pipenv` we use `pipenv` because it VERY easy to manage dependencies
 2. `cd RESTApp` to go into the folder containing the application
