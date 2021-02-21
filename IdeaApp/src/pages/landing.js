@@ -135,27 +135,7 @@ const Landing = () => {
           <BottomNavigationAction label="Completed" icon={<Done />} />
         </BottomNavigation>
       </div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
-            Benevolent
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" className={classes.buttonCard}>Learn More</Button>
-        </CardActions>
-      </Card>
+      <CustomCard title='Word of the Day' type='Benevolent' description='Meaning friend and kindly.' background={Forest} />
       <CustomCard title='test' type='test' description='test' background={Forest1} />
       <CustomCard title='Make a wish' type='Charity' description='Project focusing on bringing wishes of children with physical or mental disabilities come true.' background={Forest2} />
     </div>

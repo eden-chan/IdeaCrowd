@@ -127,16 +127,6 @@ class SignUp extends React.Component {
               autoComplete="current-password"
               onChange={this.handlePass}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="animal name"
-              label="Animal Name"
-              id="animal"
-              onChange={this.handleAnimal}
-            />
             <Button
               type="submit"
               fullWidth

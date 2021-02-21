@@ -5,6 +5,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles((theme, background) => ({
   root: {
@@ -43,8 +45,9 @@ const useStyles = makeStyles((theme, background) => ({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 14,
-    color: 'white'
+    fontSize: 18,
+    color: 'white',
+    marginTop: '5px',
   },
   pos: {
     marginBottom: 12,
@@ -71,9 +74,20 @@ const CustomCard = (props) => {
 
   return (<Card className={classes.card} style={{backgroundImage: `url(${background})`}}>
     <CardContent>
-      <Typography className={classes.title} color="textSecondary" gutterBottom>
-        Project 
-      </Typography>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          Project 
+        </Typography>
+        <FormControlLabel
+            control={
+              <Checkbox
+                name="checkedB"
+                color="default"
+              />
+            }
+            label="Mark Completed"
+          />
+      </div>
       <Typography variant="h5" component="h2">
         {title}
       </Typography>
