@@ -4,10 +4,6 @@ import Button from "@material-ui/core/Button";
 import Layout from "../components/Layout";
 
 import { fade, makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -20,8 +16,7 @@ import Forest1 from '../assets/forest1.jpg';
 import Forest2 from '../assets/forest2.png';
 
 import CustomCard from '../components/CustomCard';
-
-import {BsCheckBox} from 'react-icons/bs';
+import TemporaryDrawer from '../components/TemporaryDrawer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -138,6 +133,7 @@ const Landing = () => {
       <CustomCard title='Word of the Day' type='Benevolent' description='Meaning friend and kindly.' background={Forest} />
       <CustomCard title='test' type='test' description='test' background={Forest1} />
       <CustomCard title='Make a wish' type='Charity' description='Project focusing on bringing wishes of children with physical or mental disabilities come true.' background={Forest2} />
+      <TemporaryDrawer />
     </div>
     </div>
     );
